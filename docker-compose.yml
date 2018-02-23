@@ -7,45 +7,37 @@ services:
       #context: .
       #dockerfile: .docker/app.dockerfile
     image: semanticeffect/php-7.1-alpine-xdebug
-    volumes:
-      - ./:/var/www
+    container_name: app
     links:
       - database
-    #expose:
-      #- 9000
-    ports:
-      - 9000:9000
-    environment:
-      DB_HOST: database
-      DB_PORT: 3306
+      - redis
+    expose:
+      - 9000
 
 # THE WEB SERVER
   web:
     build:
       context: .
       dockerfile: .docker/web.dockerfile
-    working_dir: /var/www
-    image: nginx-local
+    container_name: web
     links:
       - app
-    volumes:
-      - ./:/var/www
-    #ports:
-      #- 80:80
     expose:
       - 80
 
   # THE DATABASE
   database:
     image: mysql:5.7
+    container_name: database
     expose:
       - 3306
     ports:
-      - 33061:3306
+      - 33063:3306
 
   # THE CACHE
   redis:
     image: redis:4.0-alpine
+    container_name: redis
     ports:
       - 63791:6379
 

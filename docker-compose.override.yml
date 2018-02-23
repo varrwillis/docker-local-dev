@@ -1,23 +1,29 @@
 version: '3'
 
 services:
+  # THE APPLICATION
+  app:
+    volumes:
+      - ../docker_test:/var/www
+    env_file:
+      - docker.env
 
-# THE WEB SERVER
+  # THE WEB SERVER
   web:
+    volumes:
+      - ../docker_test:/var/www
     env_file:
       - docker.env
     networks:
       - default
       - nginx-proxy
 
+  # THE DATABASE
   database:
     volumes:
-      - dbdata:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: default_database
-      MYSQL_USER: app_user
-      MYSQL_PASSWORD: app_password
-      MYSQL_ROOT_PASSWORD: app_root_password
+      - project_dbdata:/var/lib/mysql
+    env_file:
+      - docker.env
 
 networks:
   nginx-proxy:
@@ -25,5 +31,5 @@ networks:
       name: nginx-proxy
 
 volumes:
-  dbdata:
+  project_dbdata:
 

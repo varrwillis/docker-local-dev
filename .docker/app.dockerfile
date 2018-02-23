@@ -20,12 +20,10 @@ LABEL Maintainer="Varr Willis <semanticeffect@gmail.com>" \
       org.label-schema.schema-version="1.0.0"
 
 RUN apk update && \
-    apk add --no-cache curl icu-dev libmcrypt-dev freetype-dev libjpeg-turbo-dev libpng-dev \
+    apk add --no-cache mysql-client curl icu-dev libmcrypt-dev freetype-dev libjpeg-turbo-dev libpng-dev \
         icu libmcrypt freetype libpng libjpeg-turbo && \
     apk add --no-cache --virtual build-dependencies libxml2-dev g++ make autoconf && \
     apk add --no-cache nano && \
-    #For installing the libpng-dev libraries
-    #ldconfig && \
     docker-php-source extract && \
     pecl install xdebug redis && \
     docker-php-ext-enable xdebug redis && \
@@ -36,7 +34,6 @@ RUN apk update && \
     echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    #curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     curl -o /tmp/composer-setup.php https://getcomposer.org/installer && \
     curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig && \
     php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }" && \
