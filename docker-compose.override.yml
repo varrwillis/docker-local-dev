@@ -27,7 +27,7 @@ services:
 
 networks:
   nginx-proxy:
-    external:
+      external: true
       name: nginx-proxy
 
 volumes:

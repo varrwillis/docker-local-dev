@@ -1,4 +1,4 @@
-FROM nginx:1.13.8-alpine
+FROM nginx:stable-alpine
 
 ENV PHP_HOST app
 ENV PHP_PORT 9000

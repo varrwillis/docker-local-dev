@@ -2,7 +2,7 @@
 
 1) Modify the docker.env to match your needs (DO NOT MODIFY DB_HOST, DB_CONNECTION or DB_PORT)
 
-2) Edit the nginx.vhost.config server_name parameter to match the VIRTUAL_HOST entry from the dovker.env.
+2) Edit the nginx.vhost.config server_name parameter to match the VIRTUAL_HOST entry from the docker.env.
 
 3) Edit the volumes (i.e. docker_test) in the docker-compose.override.yml file (lines 7 - 14) and make sure they match. Ignore this for now if you intend to run the provided mini test site first.
 

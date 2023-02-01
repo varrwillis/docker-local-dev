@@ -6,7 +6,7 @@ services:
     #build:
       #context: .
       #dockerfile: .docker/app.dockerfile
-    image: semanticeffect/php-7.1-alpine-xdebug
+    image: semanticeffect/php-7.2-alpine-xdebug
     container_name: app
     links:
       - database
@@ -27,7 +27,7 @@ services:
 
   # THE DATABASE
   database:
-    image: mysql:5.7
+    image: mysql:8.0.32
     container_name: database
     expose:
       - 3306
